@@ -68,6 +68,19 @@ def test_add_task_via_web(web_client: Tuple[TaskManagerWebApp, Path]) -> None:
     assert tasks[0].description == "Update README"
 
 
+def test_task_index_displayed_in_list(web_client: Tuple[TaskManagerWebApp, Path]) -> None:
+    app, storage = web_client
+    manager = TaskManager(storage_path=storage)
+    manager.add_task("Alpha")
+    manager.add_task("Beta")
+
+    status, _, body = call_app(app, "GET", "/")
+    assert status.startswith("200")
+    html = body.decode()
+    assert "#1" in html
+    assert "#2" in html
+
+
 def test_complete_and_delete_task(web_client: Tuple[TaskManagerWebApp, Path]) -> None:
     app, storage = web_client
     manager = TaskManager(storage_path=storage)

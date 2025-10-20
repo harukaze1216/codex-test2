@@ -222,10 +222,11 @@ class TaskManagerWebApp:
         return f"""
 <li class=\"{classes}\">
   <div class=\"task-main\">
-    <div>
+    <div class=\"task-header\">
+      <span class=\"task-index\">#{index + 1}</span>
       <p class=\"task-title\">{html.escape(task.title)}</p>
-      {description}
     </div>
+    {description}
     <div class=\"task-meta\">
       <span>Created {_format_datetime(task.created_at)}</span>
       {completed}
