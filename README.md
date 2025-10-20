@@ -1,6 +1,6 @@
 # Task Management App
 
-A lightweight task manager with both a command-line interface and a browser-based experience backed by a JSON datastore.
+A lightweight task manager with a command-line interface, a Python WSGI web server, and a static front-end that can be hosted on GitHub Pages.
 
 ## Features
 
@@ -8,14 +8,32 @@ A lightweight task manager with both a command-line interface and a browser-base
 - List pending or completed tasks with timestamps.
 - Mark tasks as completed, delete them, or clear all completed tasks.
 - Zero-dependency web UI powered by Python's built-in WSGI server.
-- Persist tasks to `tasks.json` for easy portability.
+- Static single-page app that runs entirely in the browser and saves tasks to `localStorage`, making it ideal for GitHub Pages hosting.
+- Persist tasks to `tasks.json` for easy portability when using the CLI or WSGI server.
 
 ## Requirements
 
 - Python 3.9+
 - (Optional) `pytest` for running the automated test suite.
 
-## Running the web app
+## GitHub Pages deployment
+
+The repository ships with a static web client located in the `docs/` directory. GitHub Pages can serve this directory without any build step.
+
+1. Push the repository to GitHub.
+2. Navigate to **Settings → Pages** in your repository.
+3. Under **Build and deployment**, choose `Deploy from a branch`.
+4. Select the `main` branch and the `/docs` folder, then click **Save**.
+5. Wait for GitHub Pages to publish the site. Once complete, the hosted URL will run the task manager entirely in the browser, storing tasks in local storage.
+
+To preview the static site locally, run a simple HTTP server and open `http://localhost:8000`:
+
+```bash
+cd docs
+python -m http.server
+```
+
+## Running the Python web app
 
 1. Ensure you are in the project directory.
 2. Launch the development server:

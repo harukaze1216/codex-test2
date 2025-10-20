@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>タスク管理アプリ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero">
+        <h1>タスク管理</h1>
+        <p>GitHub Pages で動作するクライアントサイドのタスク管理アプリです。ブラウザーのローカルストレージにタスクを保存します。</p>
+      </header>
+
+      <section class="panel" aria-labelledby="new-task-heading">
+        <div class="panel__header">
+          <h2 id="new-task-heading">新しいタスク</h2>
+        </div>
+        <form id="new-task-form" class="task-form">
+          <label class="field">
+            <span class="field__label">タイトル</span>
+            <input type="text" id="task-title" name="title" required maxlength="120" placeholder="例：買い物に行く" />
+          </label>
+          <label class="field">
+            <span class="field__label">詳細</span>
+            <textarea id="task-description" name="description" rows="3" maxlength="500" placeholder="必要であれば詳細を入力してください"></textarea>
+          </label>
+          <button type="submit" class="btn btn--primary">タスクを追加</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="task-list-heading">
+        <div class="panel__header">
+          <h2 id="task-list-heading">タスクリスト</h2>
+          <div class="actions">
+            <label class="toggle">
+              <input type="checkbox" id="show-completed" />
+              <span>完了したタスクも表示</span>
+            </label>
+            <button type="button" id="clear-completed" class="btn btn--ghost" disabled>完了を一括削除</button>
+          </div>
+        </div>
+        <div id="empty-state" class="empty">登録されているタスクはありません。</div>
+        <ul id="task-list" class="task-list" aria-live="polite" aria-relevant="all"></ul>
+      </section>
+    </main>
+
+    <template id="task-item-template">
+      <li class="task">
+        <div class="task__index" aria-hidden="true"></div>
+        <div class="task__body">
+          <div class="task__title"></div>
+          <div class="task__description"></div>
+          <div class="task__meta"></div>
+        </div>
+        <div class="task__actions">
+          <button type="button" class="btn btn--icon complete" title="完了にする">
+            <span class="sr-only">完了にする</span>
+            ✓
+          </button>
+          <button type="button" class="btn btn--icon delete" title="削除する">
+            <span class="sr-only">削除する</span>
+            🗑
+          </button>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
